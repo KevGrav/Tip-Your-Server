@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 
 const server = http.createServer((request, response) => {
-  if (request.url === "/create-directory") {
+  if (request.url === "/create-directory" && request.method ==="POST") {
     // Create a directory named 'content'
     fs.mkdir('content', { recursive: true }, (err) => {
       if (err) {
@@ -13,7 +13,7 @@ const server = http.createServer((request, response) => {
       console.log('content folder created');
       response.end('content folder created');
     });
-  } else if (request.url === "/create-text") {
+  } else if (request.url === "/create-text" && request.method ==="POST") {
     // Create a file named 'randomText.txt' and write a short string to it
     fs.writeFile('randomText.txt', 'This is some random text.', (err) => {
       if (err) {
@@ -24,7 +24,7 @@ const server = http.createServer((request, response) => {
       console.log('randomText.txt created');
       response.end('randomText.txt created');
     });
-  } else if (request.url === "/new-folder-and-file") {
+  } else if (request.url === "/new-folder-and-file" && request.method ==="POST") {
     // Read data from 'randomText.txt'
     fs.readFile('randomText.txt', (readErr, data) => {
       if (readErr) {
@@ -44,7 +44,7 @@ const server = http.createServer((request, response) => {
 
         // Set a timeout to delete the 'content' directory after 7 seconds
         setTimeout(() => {
-          fs.rmdir('content', { recursive: true }, (err) => {
+          fs.rm('content', { recursive: true }, (err) => {
             if (err) {
               console.error('Error deleting content directory', err);
               return;

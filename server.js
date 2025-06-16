@@ -55,7 +55,7 @@ const server = http.createServer((request, response) => {
       });
     });
   } else {
-    // Handle all other URLs
+    // Handle all other URLs here
     response.end('Invalid request');
   }
 });
